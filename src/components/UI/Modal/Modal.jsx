@@ -26,18 +26,17 @@ export default function Modal(props) {
           <label htmlFor="NumberOfQuestions">Number of Questions: </label>
           <input
             style={{ display: 'block' }}
-            min="0"
-            max="40"
+            min="5"
+            max="25"
             step="5"
             type="number"
             name="questionsNumber"
             value={props.questionsValue}
             onChange={props.change}
+            onKeyDown={(e) => e.preventDefault()}
           />
         </div>
-        <button onClick={props.click} className={classes.Start}>
-          Play Quiz!
-        </button>
+        <button className={classes.Start}>Play Quiz!</button>
       </form>
     </div>
   );

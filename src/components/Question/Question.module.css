@@ -1,0 +1,28 @@
+.Question button {
+  border: none;
+  padding: 10px 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 600px;
+  margin: 1rem;
+}
+
+.Question button:hover:enabled {
+  background-color: #5e95ef;
+  color: white;
+}
+
+.Question button:focus {
+  outline: none;
+}
+
+.Correct {
+  background-color: lightgreen;
+  color: black;
+}
+
+.Wrong {
+  background-color: salmon;
+  color: black;
+}

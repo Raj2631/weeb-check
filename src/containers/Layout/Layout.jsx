@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import classes from './Layout.module.css';
-import Home from '../components/Home/Home';
-import Backdrop from '../components/UI/Backdrop/Backdrop';
-import Modal from '../components/UI/Modal/Modal';
+import Home from '../../components/Home/Home';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import Modal from '../../components/UI/Modal/Modal';
+import Quiz from '../Quiz/Quiz';
 
 export default class Layout extends Component {
   state = {
@@ -12,6 +13,8 @@ export default class Layout extends Component {
       difficulty: 'medium',
       numberOfQuestions: 10,
     },
+    playing: false,
+    reload: false,
   };
 
   componentDidMount() {
@@ -22,7 +25,8 @@ export default class Layout extends Component {
     if (
       this.state.queryValues.difficulty !== prevState.queryValues.difficulty ||
       this.state.queryValues.numberOfQuestions !==
-        prevState.queryValues.numberOfQuestions
+        prevState.queryValues.numberOfQuestions ||
+      this.state.reload !== prevState.reload
     ) {
       this.fetchData();
     }
@@ -40,7 +44,7 @@ export default class Layout extends Component {
       const options = [...incorrect_answers, correct_answer];
       const obj = {
         question: question,
-        options,
+        options: options.sort(() => Math.random() - 0.5),
         correct: correct_answer,
       };
       questionArr.push(obj);
@@ -59,7 +63,6 @@ export default class Layout extends Component {
         ...this.state.queryValues,
         difficulty: event.target.value,
       };
-
       this.setState({ queryValues: newValues });
     } else {
       newValues = {
@@ -77,6 +80,18 @@ export default class Layout extends Component {
 
   onSubmitHandler = (e) => {
     e.preventDefault();
+    this.setState({ playing: true, closeModal: true });
+  };
+
+  onPlayAgainHandler = () => {
+    const qValues = { difficulty: 'medium', numberOfQuestions: 10 };
+    this.setState({
+      questions: null,
+      closeModal: true,
+      queryValues: qValues,
+      playing: false,
+      reload: true,
+    });
   };
 
   render() {
@@ -97,10 +112,21 @@ export default class Layout extends Component {
         </Backdrop>
       );
     }
+    console.log(this.state.questions);
     return (
       <div className={classes.Layout}>
         {modal}
-        <Home clickOnCustom={this.onCustomHandler} />
+        {this.state.playing && this.state.questions ? (
+          <Quiz
+            questions={this.state.questions}
+            playAgain={this.onPlayAgainHandler}
+          />
+        ) : (
+          <Home
+            clickOnCustom={this.onCustomHandler}
+            play={this.onSubmitHandler}
+          />
+        )}
       </div>
     );
   }

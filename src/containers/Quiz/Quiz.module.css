@@ -1,0 +1,15 @@
+.Quiz {
+  margin: 1rem auto;
+  width: 90%;
+}
+
+.Quiz > button {
+  margin-top: 1rem;
+  outline: 0;
+  padding: 10px 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #5e95ef;
+  color: white;
+}

@@ -8,7 +8,9 @@ const Home = (props) => {
       <h1>WeebCheck</h1>
       <p>Do you like anime? Join the quiz game and see how you perform!</p>
       <img height="300" width="500" src={svgImage} alt="" />
-      <button className={classes.Quick}>Quick Game</button>
+      <button className={classes.Quick} onClick={props.play}>
+        Quick Game
+      </button>
       <button className={classes.Custom} onClick={props.clickOnCustom}>
         Custom
       </button>
