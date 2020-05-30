@@ -20,15 +20,14 @@ export default function Question(props) {
         disabled={disabled}
         onClick={props.onAnswer}
         key={option}
-      >
-        {option}
-      </button>
+        dangerouslySetInnerHTML={{ __html: option }}
+      ></button>
     );
   });
 
   return (
     <div className={classes.Question}>
-      <p>{props.question.question.replace(/&quot;/g, '"')}</p>
+      <p dangerouslySetInnerHTML={{ __html: props.question.question }} />
       <div>{buttons}</div>
     </div>
   );

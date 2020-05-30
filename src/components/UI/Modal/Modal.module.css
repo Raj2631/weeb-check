@@ -1,8 +1,8 @@
 .Modal {
   background-color: white;
   border-radius: 5px;
-  width: 400px;
-  height: 300px;
+  width: 250px;
+  height: 270px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -25,6 +25,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 200px;
   transition: all ease 0.4s;
 }
 
@@ -50,4 +51,25 @@
 .Custom:hover {
   background-color: #5e95ef;
   color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .Home button {
+    display: block;
+    margin: 1rem auto;
+  }
+
+  .Home img {
+    display: none;
+  }
+
+  .Home .Quick {
+    background-color: #5e95ef;
+    color: white;
+    margin-top: 100px;
+  }
+
+  .Custom {
+    margin-left: 0;
+  }
 }

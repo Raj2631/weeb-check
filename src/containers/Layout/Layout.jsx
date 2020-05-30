@@ -26,7 +26,7 @@ export default class Layout extends Component {
       this.state.queryValues.difficulty !== prevState.queryValues.difficulty ||
       this.state.queryValues.numberOfQuestions !==
         prevState.queryValues.numberOfQuestions ||
-      this.state.reload !== prevState.reload
+      this.state.reload === true
     ) {
       this.fetchData();
     }
