@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import Question from '../../components/Question/Question';
 import classes from './Quiz.module.css';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import Modal from '../../components/UI/Modal/Modal';
 
 class Quiz extends Component {
   state = {
     solved: 0,
     current: 0,
     selected: false,
+    showModal: false,
   };
 
   onAnswerHandler = (e) => {
     this.setState({ selected: true });
-    console.log(e.target.dataset.correct, e.target.innerText);
     if (e.target.innerText === e.target.dataset.correct) {
       this.setState((prevState) => ({ solved: prevState.solved + 1 }));
+    }
+    if (this.state.current === this.props.questions.length - 1) {
+      this.setState({ showModal: true });
     }
   };
 
@@ -22,6 +27,10 @@ class Quiz extends Component {
       current: prevState.current + 1,
       selected: false,
     }));
+  };
+
+  onCloseModalHandler = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -33,8 +42,18 @@ class Quiz extends Component {
       ) : (
         <button onClick={this.props.playAgain}>Play Again</button>
       );
+    let modal = null;
+    if (this.state.showModal) {
+      const result = `${this.state.solved}/${totalQuestions}`;
+      modal = (
+        <Backdrop close={this.state.closeModal}>
+          <Modal result={result} click={this.onCloseModalHandler} />
+        </Backdrop>
+      );
+    }
     return (
       <div className={classes.Quiz}>
+        {modal}
         <h1>
           Correct: {this.state.solved}/{totalQuestions}
         </h1>
