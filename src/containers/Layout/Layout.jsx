@@ -49,7 +49,7 @@ export default class Layout extends Component {
       };
       questionArr.push(obj);
     });
-    this.setState({ questions: questionArr });
+    this.setState({ questions: questionArr, reload: false });
   };
 
   onCloseModalHandler = () => {

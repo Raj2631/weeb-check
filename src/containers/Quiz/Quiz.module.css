@@ -17,3 +17,9 @@
   background-color: #5e95ef;
   color: white;
 }
+
+@media screen and (max-width: 600px) {
+  .Quiz {
+    margin: 0;
+  }
+}
